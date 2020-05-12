@@ -24,45 +24,38 @@ function __trav_common_url(){
 
 function __trav_get_url() {
     __trav_common_url "$@"
-  url="https://travis-ci.org/$url"
-}
+    tempurl="https://travis-ci.com/$url"
+    if curl -s --head  --request GET $tempurl | grep "404 Not Found" > /dev/null;then
+        finalurl="https://travis-ci.org/$url"
+    else
+        finalurl="$tempurl"
 
-function __trav_get_priv_url() {
-    __trav_common_url "$@"
-    url="https://travis-ci.com/$url"
+    fi
+
 }
 
 function trav-git() {
   if __trav_check_yml; then
     __trav_get_url "$@"
-    __trav_open $url
+    __trav_open $finalurl
   else
     echo "No .travis.yml file found." >&2
   fi
 }
 
-function trav-priv-git() {
-  if __trav_check_yml; then
-    __trav_get_priv_url "$@"
-    __trav_open $url
-  else
-    echo "No .travis.yml file found." >&2
-  fi
+function trav-git-br() {
+    trav-git "/branches"
 }
 
-function trav-priv-git-br() {
-    trav-priv-git "/branches"
+function trav-git-pr() {
+    trav-git "/pull_requests"
 }
 
-function trav-priv-git-pr() {
-    trav-priv-git "/pull_requests"
+function trav-git-build() {
+    trav-git "/builds"
 }
 
-function trav-priv-git-build() {
-    trav-priv-git "/builds"
-}
-
-alias tg=trav-priv-git
-alias tgb=trav-priv-git-build
-alias tgbr=trav-priv-git-br
-alias tgpr=trav-priv-git-pr
+alias tg=trav-git
+alias tgb=trav-git-build
+alias tgbr=trav-git-br
+alias tgpr=trav-git-pr
