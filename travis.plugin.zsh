@@ -1,60 +1,52 @@
 #!/bin/zsh
-__trav_open() {
-  if [ "$(uname -s)" = "Darwin" ]; then
-    open "$1" 2> /dev/null
-  else
-    xdg-open "$1" &> /dev/null
-  fi
+function __trav_open() {
+
+    ${=ZPWR_OPEN_CMD} "$1"
 }
 
-__trav_check_yml() {
+function __trav_check_yml() {
   trav_file="$(git rev-parse --show-toplevel)/.travis.yml"
-  if [ -f $trav_file ]; then
-    return 0
-  else
-    return 1
-  fi
+  test -f $trav_file || return 1
 }
 
-__trav_get_url() {
+function __trav_common_url(){
+
   repo_url=$(git config --get remote.origin.url)
   branch=$(git rev-parse --abbrev-ref HEAD)
-  url="${repo_url/git/https}"
-  url="${url/httpshub/github}"
-  url="${url/.git//}"
-  url="${url/https@/https://}"
-  url="${url/com:/com/}"
-  url="${url/https:\/\/github.com\//}"
-  url="${url%/*}"
+  url="${repo_url/https:\/\//}"
+  url="${url/http:\/\//}"
+  url="${url/ssh:\/\//}"
+  url="${url/git:\/\//}"
+  url="${url/.com/}"
+  url="${url/.git/}"
+}
+
+function __trav_get_url() {
+    __trav_common_url
   url="https://travis-ci.org/$url"
 }
-__trav_get_priv_url() {
-  repo_url=$(git config --get remote.origin.url)
-  branch=$(git rev-parse --abbrev-ref HEAD)
-  url="${repo_url/git/https}"
-  url="${url/httpshub/github}"
-  url="${url/.git//}"
-  url="${url/https@/https://}"
-  url="${url/com:/com/}"
-  url="${url/https:\/\/github.com\//}"
-  url="${url%/*}"
-  url="https://travis-ci.com/$url"
+
+function __trav_get_priv_url() {
+    __trav_common_url
+    url="https://travis-ci.com/$url"
 }
-git-trav() {
+
+function trav-git() {
   if __trav_check_yml; then
     __trav_get_url
     __trav_open $url
   else
-    echo "No .travis.yml file found."
+    echo "No .travis.yml file found." >&2
   fi
 }
-git-trav-priv() {
+
+function trav-priv-git() {
   if __trav_check_yml; then
     __trav_get_priv_url
     __trav_open $url
   else
-    echo "No .travis.yml file found."
+    echo "No .travis.yml file found." >&2
   fi
 }
 
-# git config --global alias.trav '!zsh -ic git-trav'
+alias tg=trav-priv-git
