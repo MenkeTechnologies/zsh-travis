@@ -56,6 +56,6 @@ function trav-git-build() {
 }
 
 alias tg=trav-git
-alias tgb=trav-git-build
-alias tgbr=trav-git-br
-alias tgpr=trav-git-pr
+alias tb=trav-git-build
+alias tbr=trav-git-br
+alias tpr=trav-git-pr
