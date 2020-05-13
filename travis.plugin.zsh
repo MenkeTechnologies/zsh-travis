@@ -31,7 +31,7 @@ fi
 
 function __trav_open() {
 
-    ${=ZPWR_OPEN_CMD} "$1"
+    ${=ZPWR_OPEN_CMD} "$1" 2>/dev/null
 }
 
 function __trav_check_yml() {
