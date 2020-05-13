@@ -1,49 +1,30 @@
 # zsh-travis
 
-ZSH plugin to open Travis CI page for the current repo (if it exists).
+ZSH plugin to open Travis CI .com page for the current repo (if .travis.yml exists).
 
-## Usage
-
-```sh
-$ git-trav
-$ git-trav-priv
-```
-
-### As a git alias
+## Functions
 
 ```sh
-$ git config --global alias.trav '!zsh -ic git-trav'
+trav-git # open travis main page
+trav-git-br# open travis branch page
+trav-git-build # open travis build page
+trav-git-pr # open travis PR page
 ```
 
-## Installation
-
-#### Using antibody:
+## Aliases
 
 ```sh
-$ antibody bundle denolfe/zsh-travis
+alias tg=trav-git
+alias tb=trav-git-build
+alias tbr=trav-git-br
+alias tpr=trav-git-pr
 ```
 
-#### Using antigen:
+## Install for Oh My Zsh
 
 ```sh
-$ antigen bundle denolfe/zsh-travis
+cd "$HOME/.oh-my-zsh/custom/plugins" && git clone https://github.com/MenkeTechnologies/zsh-travis.git
 ```
 
-#### Using zgen:
+Add `zsh-travis` to plugins array in ~/.zshrc
 
-```sh
-$ zgen load denolfe/zsh-travis
-```
-
-## To Do
-
-- Open other specific Travis pages
-- Open last or current build
-
-## Contributing
-
-1. Fork it!
-2. Create your feature branch: \`git checkout -b my-new-feature\`
-3. Commit your changes: \`git commit -am 'Add some feature'\`
-4. Push to the branch: \`git push origin my-new-feature\`
-5. Submit a pull request :D
