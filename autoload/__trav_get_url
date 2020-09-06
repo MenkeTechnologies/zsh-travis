@@ -1,0 +1,12 @@
+function __trav_get_url() {
+    __trav_common_url "$@"
+    tempurl="https://travis-ci.com/$url"
+    if curl -s --head  --request GET $tempurl | grep "404 Not Found" > /dev/null;then
+        finalurl="https://travis-ci.org/$url"
+    else
+        finalurl="$tempurl"
+
+    fi
+
+}
+__trav_get_url "$@"

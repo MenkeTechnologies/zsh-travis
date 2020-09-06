@@ -1,0 +1,6 @@
+function __trav_open() {
+
+    ${=ZPWR_OPEN_CMD} "$1" 2>/dev/null
+}
+
+__trav_open "$@"

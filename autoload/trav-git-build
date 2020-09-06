@@ -1,0 +1,4 @@
+function trav-git-build() {
+    trav-git "/builds"
+}
+trav-git-build "$@"

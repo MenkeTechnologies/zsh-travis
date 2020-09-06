@@ -1,0 +1,5 @@
+function trav-git-pr() {
+    trav-git "/pull_requests"
+}
+
+trav-git-pr "$@"

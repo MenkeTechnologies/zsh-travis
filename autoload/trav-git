@@ -1,0 +1,10 @@
+function trav-git() {
+  if __trav_check_yml; then
+    __trav_get_url "$@"
+    __trav_open $finalurl
+  else
+    echo "No .travis.yml file found." >&2
+  fi
+}
+
+trav-git "$@"

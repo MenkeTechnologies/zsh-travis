@@ -1,0 +1,14 @@
+function __trav_common_url(){
+
+  repo_url=$(git config --get remote.origin.url)
+  branch=$(git rev-parse --abbrev-ref HEAD)
+  url="${repo_url/https:\/\//}"
+  url="${url/http:\/\//}"
+  url="${url/ssh:\/\//}"
+  url="${url/git:\/\//}"
+  url="${url/.com/}"
+  url="${url/.git/}"
+  url="$url$1"
+}
+
+__trav_common_url "$@"

@@ -1,0 +1,6 @@
+function __trav_check_yml() {
+  trav_file="$(git rev-parse --show-toplevel)/.travis.yml"
+  test -f $trav_file || return 1
+}
+
+__trav_check_yml "$@"

@@ -1,0 +1,4 @@
+function trav-git-br() {
+    trav-git "/branches"
+}
+trav-git-br "$@"
