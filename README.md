@@ -26,7 +26,7 @@
 
 ## `> SYSTEM OVERVIEW`
 
-`zsh-travis` adds four functions + four aliases for opening Travis CI pages directly from the project directory. Detects `.travis.yml`, parses `git remote -v` for the upstream, and `open`s the right Travis URL — main, branch, build, or PR.
+`zsh-travis` adds four functions + four aliases for opening Travis CI pages directly from the project directory. Detects `.travis.yml`, reads `git config --get remote.origin.url` for the upstream, and `open`s the right Travis URL — main, branch, build, or PR.
 
 Pairs with [`gh_reveal`](https://github.com/MenkeTechnologies/gh_reveal) and the rest of the [zpwr](https://github.com/MenkeTechnologies/zpwr) plugin chain.
 
@@ -41,7 +41,7 @@ tbr      trav-git-br        open the current-branch builds
 tpr      trav-git-pr        open the open PR builds
 ```
 
-All four no-op cleanly if `.travis.yml` is absent — safe to bind globally.
+All four print `No .travis.yml file found.` to stderr if `.travis.yml` is absent — safe to bind globally.
 
 ---
 
