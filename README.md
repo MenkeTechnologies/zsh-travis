@@ -10,6 +10,8 @@
 <code>// `tg`, `tb`, `tbr`, `tpr` — TRAVIS CI BUILD PAGES, ONE KEYSTROKE.</code>
 </p>
 
+### [`Read the Docs`](https://menketechnologies.github.io/zsh-travis/) &middot; [`Engineering Report`](https://menketechnologies.github.io/zsh-travis/report.html)
+
 ---
 
 [![Aliases](https://img.shields.io/badge/aliases-4-ff2a6d.svg)](zsh-travis.plugin.zsh)
